@@ -1,0 +1,31 @@
+
+**** Build of configuration Debug for project systick_test ****
+
+/home/rokas/ti/ccs1110/ccs/utils/bin/gmake -k -j 4 all -O 
+ 
+Building file: "../tm4c123gh6pm_startup_ccs.c"
+Invoking: Arm Compiler
+"/home/rokas/ti/ccs1110/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="/home/rokas/Desktop/Embedded programming/systick_test" --include_path="/home/rokas/ti/ccs1110/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="tm4c123gh6pm_startup_ccs.d_raw"  "../tm4c123gh6pm_startup_ccs.c"
+Finished building: "../tm4c123gh6pm_startup_ccs.c"
+ 
+Building file: "../systick.c"
+Invoking: Arm Compiler
+"/home/rokas/ti/ccs1110/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="/home/rokas/Desktop/Embedded programming/systick_test" --include_path="/home/rokas/ti/ccs1110/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="systick.d_raw"  "../systick.c"
+"../systick.c", line 43: warning #69-D: integer conversion resulted in a change of sign
+"../main.c", line 42: warning #112-D: statement is unreachable
+"../main.c", line 22: warning #552-D: variable "dummy" was set but never used
+Finished building: "../systick.c"
+ 
+Building file: "../main.c"
+Invoking: Arm Compiler
+"/home/rokas/ti/ccs1110/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="/home/rokas/Desktop/Embedded programming/systick_test" --include_path="/home/rokas/ti/ccs1110/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building target: "systick_test.out"
+Invoking: Arm Linker
+"/home/rokas/ti/ccs1110/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"systick_test.map" --heap_size=0 --stack_size=512 -i"/home/rokas/ti/ccs1110/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/lib" -i"/home/rokas/ti/ccs1110/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="systick_test_linkInfo.xml" --rom_model -o "systick_test.out" "./main.obj" "./systick.obj" "./tm4c123gh6pm_startup_ccs.obj" "../tm4c123gh6pm.cmd"  -llibc.a 
+<Linking>
+Finished building target: "systick_test.out"
+ 
+
+**** Build Finished ****

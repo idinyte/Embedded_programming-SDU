@@ -1,0 +1,60 @@
+/*****************************************************************************
+* University of Southern Denmark
+* Embedded Programming (EMP)
+*
+* MODULENAME.: lcd.c
+*
+* PROJECT....: EMP
+*
+* DESCRIPTION: See module specification file (.h-file).
+*
+* Change Log:
+*****************************************************************************
+* Date    Id    Change
+* YYMMDD
+* --------------------
+* 220304  MoH   Module created.
+*
+*****************************************************************************/
+
+/***************************** Include files *******************************/
+
+#include <stdint.h>
+#include "tm4c123gh6pm.h"
+#include "emp_type.h"
+
+/*****************************    Defines    *******************************/
+
+/*****************************   Constants   *******************************/
+#define CLEAR   0
+#define DISPLAY 1
+/*****************************   Variables   *******************************/
+/*****************************   Functions   *******************************/
+
+
+
+int lcd(INT8U action)
+/*****************************************************************************
+*   Input    :
+*   Output   :
+*   Function : The super loop.
+******************************************************************************/
+{
+    if (action)
+    {
+        switch (action)
+        {
+        case CLEAR:
+            GPIO_PORTF_DATA_R = 0x0;
+            GPIO_PORTF_DATA_R = 0x10;
+            break;
+        case DISPLAY: // actually off
+            GPIO_PORTF_DATA_R = 0x0;
+            GPIO_PORTF_DATA_R = 0x80;
+            break;
+        }
+    }
+  return( 0 );
+}
+
+/****************************** End Of Module *******************************/

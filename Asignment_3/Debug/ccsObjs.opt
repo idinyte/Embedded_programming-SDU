@@ -1,0 +1,1 @@
+"./button.obj" "./event_manager.obj" "./gpio.obj" "./lcd.obj" "./main.obj" "./systick.obj" "./tm4c123gh6pm_startup_ccs.obj" "../tm4c123gh6pm.cmd" -llibc.a 

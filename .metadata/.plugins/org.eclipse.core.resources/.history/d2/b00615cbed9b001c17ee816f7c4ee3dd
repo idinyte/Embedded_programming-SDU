@@ -1,0 +1,142 @@
+/*****************************************************************************
+* University of Southern Denmark
+* Embedded Programming (EMP)
+*
+* MODULENAME.: lcd.c
+*
+* PROJECT....: EMP
+*
+* DESCRIPTION: See module specification file (.h-file).
+*
+* Change Log:
+*****************************************************************************
+* Date    Id    Change
+* YYMMDD
+* --------------------
+* 220304  MoH   Module created.
+*
+*****************************************************************************/
+
+/***************************** Include files *******************************/
+
+#include <stdint.h>
+#include "tm4c123gh6pm.h"
+#include "emp_type.h"
+
+/*****************************    Defines    *******************************/
+
+/*****************************   Constants   *******************************/
+#define INITIALIZE   0
+#define TURN_ON 1
+#define SET_MODE 2
+#define WRITE 3
+/*****************************   Variables   *******************************/
+/*****************************   Functions   *******************************/
+
+
+
+int lcd(INT8U action)
+/*****************************************************************************
+*   Input    :
+*   Output   :
+*   Function : The super loop.
+******************************************************************************/
+{
+    static INT8U bus_timer = TIM_100_MSEC;
+    static INT8U state = SETUP;
+    static INT8U traffic = 0;
+    INT8U bus_timeout;
+
+    if (bus_timer)
+    {
+        if (! --bus_timer)
+        {
+            bus_timeout = TE_TIMEOUT;
+        }
+    }
+
+
+    switch( state )
+    {
+    case INITIALIZE:
+        if(bus_timout == TE_TIMEOUT)
+        {
+            if(traffic == 0)
+            {
+                // Sets LCD display mode to 4 bit
+                GPIO_PORTC_DATA_R = 0x34;
+                traffic = 1;
+                bus_timer = TIM_100_MSEC;
+            }
+            else
+            {
+                // Sets number of display lines and font
+                GPIO_PORTC_DATA_R = 0x0;
+                traffic = 0;
+                state = TURN_ON;
+                bus_timer = TIM_100_MSEC;
+            }
+        break;
+    case TURN_ON: // turns on display
+        if (bus_timout == TE_TIMEOUT)
+        {
+            if(traffic == 0)
+            {
+                GPIO_PORTC_DATA_R = 0x00;
+                traffic = 1;
+                bus_timer = TIM_100_MSEC;
+            }
+            else
+            {
+                GPIO_PORTC_DATA_R = 0xE0;
+                traffic = 0;
+                state = SET_MODE;
+                bus_timer = TIM_100_MSEC;
+            }
+        }
+        break;
+        /* Sets mode to increment the address by one and to shift the cursor to the
+         * right at the time of write to the DD/CGRAM. Display is not shifted.*/
+    case SET_MODE:
+        if (bus_timout == TE_TIMEOUT)
+        {
+            if(traffic == 0)
+            {
+                GPIO_PORTC_DATA_R = 0x00;
+                traffic = 1;
+                bus_timer = TIM_100_MSEC;
+            }
+            else
+            {
+                GPIO_PORTC_DATA_R = 0x60;
+                traffic = 0;
+                state = WRITE;
+                bus_timer = TIM_100_MSEC;
+            }
+        }
+        break;
+    case WRITE:
+        if (bus_timout == TE_TIMEOUT)
+        {
+            if (traffic == 0)
+            {
+                GPIO_PORTD_DATA_R |= 0x04;
+                GPIO_PORTC_DATA_R = 0x00;
+                traffic = 1;
+                bus_timer = TIM_100_MSEC;
+            }
+            else
+            {
+                GPIO_PORTC_DATA_R = 0x60;
+                traffic = 0;
+                state = WRITE;
+                bus_timer = TIM_100_MSEC;
+            }
+        }
+        break;
+    }
+
+  return( 0 );
+}
+
+/****************************** End Of Module *******************************/
